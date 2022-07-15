@@ -1,6 +1,7 @@
 package demons;
 import demons.DemonStats;
 import baseabilities.Ability;
+
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ public class Demon {
 
 	//The HashMap for demons made by the DemonInitialiizer holds the ID for each demon by a String, so no ID is required inside the Demon class
 	DemonStats stats;
-	HashMap<String, Ability> abilityMap = new HashMap<String, Ability>();
+	HashMap<Integer, Ability> abilityMap = new HashMap<Integer, Ability>();
 	
 	
 	
@@ -36,6 +37,18 @@ public String[] getNameDesc() {
 	
 	return nameDesc;
 }
+
+//Overriden by the Subclasses of Demon
+//__________________________________________________________________________________________________________________________________________________________________________________________
+public void addAbilities() { 
+		System.out.println("Add Abilities Demon Not Overriden");
+	}
+
+
+	public void useAbility() {
+		System.out.println("Use Ability Not Overriden");
+	
+	}
 
 
 

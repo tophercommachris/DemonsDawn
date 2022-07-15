@@ -42,7 +42,7 @@ public class TruckKun extends Ability{
 	}
 	
 	@Override
-	public void calculateDamageOrHealing(PlayerCharacter player) {
+	public int calculateDamageOrHealing(PlayerCharacter player) {
 		
 		if(rand.nextInt(100) <= 5) {
 			damage = -9999;
@@ -54,6 +54,8 @@ public class TruckKun extends Ability{
  		System.out.println("Damage:" + damage);
  		
 		}
+		
+		return damage;
  		
  	
 	}

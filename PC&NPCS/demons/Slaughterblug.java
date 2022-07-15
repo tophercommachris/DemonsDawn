@@ -1,5 +1,9 @@
 package demons;
 
+import baseabilities.BasicAttack;
+import demonAbilities.*;
+import pc.PlayerCharacter;
+
 public class Slaughterblug extends Demon{
 	
 	public Slaughterblug() {
@@ -21,6 +25,16 @@ public class Slaughterblug extends Demon{
 		stats.name = "Slaughterblug";
 		stats.desc = "Slimy demons, mostly composed of decomposing corpses the swallow into their body. They are known for their deceptive speed";
 	}
-			
+			 
+	public void addAbilities() { 
+		abilityMap.put(0, new BasicAttack("friskiness"));
+		abilityMap.put(1, new BloodRush());
+	}
+
+	
+public void useAbility(Demon demon) {
+	abilityMap.get(0).callAbility(demon);
+		
+	}
 
 }

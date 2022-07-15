@@ -8,6 +8,7 @@
 
 
 package baseabilities;
+import demons.Demon;
 import pc.PlayerCharacter;
 
 public abstract class Ability implements AbilityMethods {
@@ -43,18 +44,26 @@ public abstract class Ability implements AbilityMethods {
 	
 	//This method is overridden and called for every ability, instead of having to call the method that is specific to the ability, the subclass customizes which method it calls
 	public void callAbility(PlayerCharacter player) {
-		System.out.println("Use Ability Method Not Overridden");
+		System.out.println("Call Ability Player Method Not Overridden");
+	}
+	
+	public void callAbility(Demon demon) {
+		System.out.println("Call Ability Demon Not Overriden");
 	}
 	
 	 public void determineAbilityMethod() {		
 			System.out.println("Determine Ability Method Not Overriden");
 		}
 	 
-	 public void calculateDamageOrHealing(PlayerCharacter player) {
+	 public int calculateDamageOrHealing(PlayerCharacter player) {
 		 System.out.println("Calculate Damage Or Healing Not Overriden");
-		
-		
+		return -1;
 		}
+	 
+	 public int calculateDamageOrHealing(Demon demon) {
+		 System.out.println("Calculate Damage or Healing Demon Not Overriden");
+		 return -1;
+	 }
 	 
 	public void delayedCast() {
 		System.out.println("Delayed Cast Not Overriden");
@@ -68,7 +77,11 @@ public abstract class Ability implements AbilityMethods {
 		
 	
 	public void alterStats(PlayerCharacter player) { //Alters health for a certain number of rounds in combat
-		System.out.println("Alter Stats Not Overeriden");
+		System.out.println("Alter Stats Not Overriden");
+	}
+	
+	public void alterStats(Demon demon) {
+		System.out.println("Alter Stats Demon Not Overriden");
 	}
 	
 	public int displayValues(PlayerCharacter player) {

@@ -50,6 +50,7 @@ public class Loop {
 			if (choice == 1) {
 				System.out.println("\nHere's what you see:");
 				lookAround();
+				Objects.rooms.get(logic.player.getLocation()).checkForDemons();
 				System.out.print("Would you like to take one of the exits?");
 				takeExit();
 				
@@ -65,8 +66,12 @@ public class Loop {
 			}
 			
 			else if (choice == 4) {
-				Objects.rooms.get(logic.player.getLocation()).checkForDemons();
-				//startEncounter();
+				if(Objects.rooms.get(logic.player.getLocation()).checkForDemons()) 
+					startEncounter();
+			
+				if (!Objects.rooms.get(logic.player.getLocation()).checkForDemons())
+					System.out.println("Nothing to Attack");
+				
 				
 			}
 			
@@ -104,7 +109,6 @@ public class Loop {
 		boolean enemyDead = false;
 		
 		
-		
 		while (!enemyDead) {
 			
 			System.out.println("What would you like to do? 1. Attack 2. Use an Item 3. Attempt to flee 4. Check Stats");
@@ -114,8 +118,6 @@ public class Loop {
 			//Have both the player object and demon object be passed, so the ability knows which health to change, since it is all passed by reference
 			if (choice == 1) {
 				
-				logic.player.useAbility(logic.player);
-				logic.player.displayStats();
 				
 			}
 			

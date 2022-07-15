@@ -57,9 +57,10 @@ public class Edgelord extends PlayerCharacter {
 		
 	}
 	
+	//Does Use Ability even need to be overriden?
 	@Override 
 	public void useAbility(PlayerCharacter player) {
-		abilityMap.get(1).callAbility(player);
+		
 	}
 	
 	
