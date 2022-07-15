@@ -1,5 +1,7 @@
 package gameSource;
 import java.io.BufferedReader;
+import demons.*;
+import java.util.HashMap;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,10 +15,15 @@ public class Objects {
 	//These arraylists hold the information regarding the items and maps for the game
 	static ArrayList<Room> rooms = new ArrayList<Room>();
 	static ArrayList<Item> items = new ArrayList<Item>();
+	static HashMap<String,Demon> demonMap = new HashMap<>();
 	
 	
-	
-	
+	//This method initializes a list of demons using the DemonInitializer class
+	static public void createDemons() {
+		DemonInitializier demons = new DemonInitializier();
+		demonMap = demons.fillDemonMap();
+		
+	}
 	//This method reads the roomList.txt file and fills in each room in the rooms ArrayList with a room number, room ID, descriptions of the room, and each exit and exitID of the room
 	static public void createRooms() throws IOException, FileNotFoundException {
 		String line;
@@ -59,6 +66,12 @@ public class Objects {
 			else if (line.contains("ExitTo:")) {
 				line = line.replaceAll("ExitTo:", "");
 				rooms.get(counter).setExitIDs(line);
+			}
+			
+			else if (line.contains("Demon:")) {
+				line = line.replaceAll("Demon:", "");
+				rooms.get(counter).addDemon(demonMap.get(line));
+			
 			}
 			
 			else if (line.equals("-")) {

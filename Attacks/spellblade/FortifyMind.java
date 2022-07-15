@@ -1,14 +1,13 @@
 package spellblade;
 
 import baseabilities.Ability;
-import pc.Stats;
+import pc.PlayerCharacter;
 
 //Example of a direct stat buff
 
 public class FortifyMind extends Ability {
 	
-	public FortifyMind(Stats stats) {
-		super(stats);
+	public FortifyMind(PlayerCharacter player) {
 		desc = "Bolsters the mind, giving a temporary 30% increase to Brainpower for 3 rounds";
 		flavor = "You conjure glyphs that write into your mind, granting you better flow of your thoughts for your time of need";
 		name = "fortifymind";
@@ -28,7 +27,6 @@ public class FortifyMind extends Ability {
 		
 		roundsTillActivated = 0;
 		
-		determineAbilityMethod();
 	}
 
 }

@@ -2,8 +2,12 @@ package gameSource;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+
+import pc.Edgelord;
 import pc.OldPLayerCharacter;
+import pc.PlayerCharacter;
 import pc.SpellBlade;
+import pc.Stats;
 
 
 public class Loop {
@@ -61,13 +65,8 @@ public class Loop {
 			}
 			
 			else if (choice == 4) {
-				//If monstersInRoom
-				/* Leveling up system for killing monsters
-				logic.player.gainXP(10);
-				logic.player.levelUp();
-				*/
-				
-				//Else System.out.println("There aren't any demons in the room!");
+				Objects.rooms.get(logic.player.getLocation()).checkForDemons();
+				//startEncounter();
 				
 			}
 			
@@ -94,11 +93,33 @@ public class Loop {
 	}//End Loop Method
 	
 	public void initializeGame() throws InterruptedException, IOException, FileNotFoundException {
+		Objects.createDemons();
+		Objects.createRooms();
 		logic = new Logic();
 	}
 	
-	public void startCombat() {
+	//Method to start the encounter when running into a demon.  Parameter uses temporary stats to make up for stats that alter the value of stats
+	public void startEncounter() throws InterruptedException {
+		int roundCounter =1;
+		boolean enemyDead = false;
 		
+		
+		
+		while (!enemyDead) {
+			
+			System.out.println("What would you like to do? 1. Attack 2. Use an Item 3. Attempt to flee 4. Check Stats");
+			choice = sc.nextInt();
+			
+			
+			//Have both the player object and demon object be passed, so the ability knows which health to change, since it is all passed by reference
+			if (choice == 1) {
+				
+				logic.player.useAbility(logic.player);
+				logic.player.displayStats();
+				
+			}
+			
+		}
 		
 		
 	}

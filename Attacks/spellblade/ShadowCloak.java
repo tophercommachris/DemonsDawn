@@ -1,7 +1,7 @@
 package spellblade;
 
 import baseabilities.Ability;
-import pc.Stats;
+import pc.PlayerCharacter;
 
 
 //Example of a multi-round duration ability, for round creation mechanics
@@ -9,8 +9,8 @@ import pc.Stats;
 public class ShadowCloak extends Ability {
 	
 	
-	public ShadowCloak(Stats stats) {
-		super(stats);
+	public ShadowCloak(PlayerCharacter player) {
+
 		desc = "Turns the caster invisible for 1 round(s), granting 100% dodge rate";
 		flavor = "Shadows leap from the flickering walls onto your skin, granting you sanctuary for but a moment";
 		name="shadowcloak";

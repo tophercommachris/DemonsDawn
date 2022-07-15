@@ -6,6 +6,7 @@ Desc:The air is cold, and the hairs on your arm seem to stand up, though nothing
 Desc:A faint smell of sulfur permeates the air, it makes your nose burn
 Exit:The Antechamber
 ExitTo:antechamber
+Demon:slaughterblug
 -
 Number:2
 ID:servantchambers

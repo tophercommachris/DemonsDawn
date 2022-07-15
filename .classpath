@@ -7,7 +7,7 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="PC&amp;NPCS"/>
-	<classpathentry kind="src" path="SpecialAttacks"/>
+	<classpathentry kind="src" path="Attacks"/>
 	<classpathentry kind="src" path="RoomEncounters"/>
 	<classpathentry kind="src" path="Items"/>
 	<classpathentry kind="output" path="bin"/>

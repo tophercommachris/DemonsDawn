@@ -18,8 +18,8 @@ public class Slaughterblug extends Demon{
 			.setXp(5)
 			.build();
 	
-		name = "Slaughterblug";
-		desc = "Slimy demons, mostly composed of decomposing corpses the swallow into thier body. They are known for their deceptive speed";
+		stats.name = "Slaughterblug";
+		stats.desc = "Slimy demons, mostly composed of decomposing corpses the swallow into their body. They are known for their deceptive speed";
 	}
 			
 

@@ -1,16 +1,16 @@
 package edgelord;
 
 import baseabilities.Ability;
-import pc.Stats;
+import pc.PlayerCharacter;
 
 public class Hmmph extends Ability{
 	
-	public Hmmph(Stats stats) {
-		super(stats);
+	public Hmmph() {
 		
-		desc = "Scoff at your opponent, you know they can't harm you.  Increases your Physical and Magical Resistance by 30 for 2 rounds";
+		desc = "Scoff at your opponent, you know they can't harm you.  Increases your Physical and Magical Resistance by   for 2 rounds";
 		flavor = "'Hmmph', you say with a smirk as they charge towards you.  Your glasses push up and turn white, you can read their every move.";
-		name = "hmmph";
+		name = "Hmmph";
+		ID = "hmmph";
 		scalingStat = "edginess";
 		
 		instantCast = true;
@@ -30,6 +30,19 @@ public class Hmmph extends Ability{
 		alterRoundDuration = 2;
 		
 		roundsTillActivated = 0;
+	}
+	
+	@Override
+	public void callAbility(PlayerCharacter player) {
+		System.out.println(flavor);
+		alterStats(player);
+	}
+	
+	@Override
+	public void alterStats(PlayerCharacter player) {
+		player.changeMagicResist(player.getEdginess());
+		player.changePhysicalResist(player.getEdginess());
+		
 	}
 
 }

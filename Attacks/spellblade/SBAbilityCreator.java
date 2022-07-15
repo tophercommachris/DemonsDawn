@@ -3,20 +3,20 @@ package spellblade;
 import baseabilities.Ability;
 import java.util.ArrayList;
 
-import pc.Stats;
+import pc.PlayerCharacter;
 
 public class SBAbilityCreator {
 	
 	ArrayList<Ability> abilities= new ArrayList<Ability>();
-	Stats stats;
+	PlayerCharacter player;
 	Ghostblade ghostblade;
 	DeadWail deadwail;
 	FortifyMind fortifymind;
 	ShadowCloak shadowcloak;
 	
-	public SBAbilityCreator(Stats stats) {
-		this.stats = stats;
-		ghostblade = new Ghostblade(stats);
+	public SBAbilityCreator(PlayerCharacter player) {
+		this.player = player;
+		ghostblade = new Ghostblade(player);
 		
 	}
 	

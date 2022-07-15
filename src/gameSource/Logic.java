@@ -9,14 +9,12 @@ import rooms.Room;
 public class Logic {
 	
 
-	protected String[] nameHolder = new String[2];
+	protected String[] nameHolder = new String[2]; 
 	protected PlayerCharacter player;
-	protected int roundCounter;
+	Scanner sc = new Scanner(System.in);
+	int choice;
 	
 	public Logic() throws InterruptedException, IOException { //Called from the loop class, which holds main
-		
-		Objects.createRooms();
-		//createItems();
 		setPlayerClass();
 		nameHolder = player.getNameTitle();
 		player.displayStats();
@@ -26,9 +24,8 @@ public class Logic {
 	//Sets the player class, called from the loop class.  Creates an object of class PlayerCharacter and initializes it with a subclass using its constructor
 	
 	public void setPlayerClass() throws InterruptedException{
-		int choice;
+		
 		int check = 1;
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Game Logic Initialized....");
 		
 		while (check != -1) {
@@ -83,15 +80,6 @@ public class Logic {
 		}
 	} //End while loop
 	
-}
-	
-	//Method to start the encounter when running into a demon
-	public void startEncounter() {
-		roundCounter =1;
-		
-		
-	}
-	
-	
-	
+	} //End SetPLayerClass Method
+
 }		 //End Class

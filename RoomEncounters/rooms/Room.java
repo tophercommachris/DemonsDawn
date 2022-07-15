@@ -5,10 +5,12 @@
 
 package rooms;
 import java.util.ArrayList;
+import java.util.HashMap;
 import items.Item;
-import demons.Demon;
+import demons.*;
 
 public class Room {
+	
 	
 	
 	ArrayList<String> roomDesc = new ArrayList<String>();
@@ -20,6 +22,25 @@ public class Room {
 	String roomID;
 	String roomName;
 	
+	public void addDemon(Demon demon) {
+		roomDemons.add(demon);
+	}
+	
+	public void checkForDemons() {
+		String[] nameDescHolder = new String[2];
+			if (roomDemons.isEmpty())
+				System.out.println("\nThere are no demons in the room\n");
+			else {
+				System.out.println("There are " + (roomDemons.size()) + " demon(s) in the room\n");
+				for (int i = 0; i < roomDemons.size(); i++) {
+					nameDescHolder = roomDemons.get(i).getNameDesc();
+
+					System.out.print((i+1) + ": " + nameDescHolder[0] + "- ");
+					System.out.println(nameDescHolder[1] + "\n\n");
+				}
+			}
+		
+	}
 	public int getRoomNumber() {
 		return roomNumber;
 	}
