@@ -26,6 +26,20 @@ public class DemonStats {
 			int friskiness, int brainpower, int edginess, int luck,
 			int magicResist, int physicalResist, int xp) {
 		
+		
+		this.maxHealth = maxHealth;
+		this.maxMana = maxMana;
+		this.currentHealth = currentHealth;
+		this.currentMana = currentMana;
+		this.buffness = buffness;
+		this.friskiness = friskiness;
+		this.brainpower = brainpower;
+		this.edginess = edginess;
+		this.luck = luck;
+		this.magicResist = magicResist;
+		this.physicalResist = physicalResist;
+		this.xp = xp;
+		
 	}
 	
 	

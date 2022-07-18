@@ -1,6 +1,7 @@
 package edgelord;
 
 import baseabilities.Ability;
+import demons.Demon;
 import pc.PlayerCharacter;
 import pc.Stats;
 import java.util.Random;
@@ -36,7 +37,7 @@ public class TruckKun extends Ability{
 	}
 	
 	@Override
-	public void callAbility(PlayerCharacter player) {
+	public void callAbility(PlayerCharacter player, Demon demon) {
 		System.out.println(flavor);
 		calculateDamageOrHealing(player);
 	}

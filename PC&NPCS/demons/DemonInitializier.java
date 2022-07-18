@@ -8,6 +8,7 @@ public class DemonInitializier {
 	
 	public DemonInitializier() {
 		demonID.put("slaughterblug", new Slaughterblug());
+		demonID.put("yecheolus", new Yecheolus());
 	}
 	
 	

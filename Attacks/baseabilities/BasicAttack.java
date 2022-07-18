@@ -35,17 +35,21 @@ public class BasicAttack extends Ability {
 
 		
 	}
+	//Call Ability Method for Player Dealing Damage to Demon
 	@Override
-	public void callAbility(PlayerCharacter player) {
+	public void callAbility(PlayerCharacter player, Demon demon) {
 		System.out.println(flavor);
-		calculateDamageOrHealing(player);
-	}
-	@Override
-	public void callAbility(Demon demon) {
-		System.out.println("The Demon Swings Basically");
-		calculateDamageOrHealing(demon);
+		demon.changeCurrentHealth(calculateDamageOrHealing(player));
 	}
 	
+	//Call Ability Method for Demon Dealing Damage To Player
+	@Override
+	public void callAbility(Demon demon, PlayerCharacter player) {
+		System.out.println("The Demon Swings Basically");
+		player.changeCurrentHealth(calculateDamageOrHealing(demon));
+	}
+	
+	//Calculate player dealing damage to demon
 	public int calculateDamageOrHealing(PlayerCharacter player) {
 		
 		if (scalingStat.equals("friskiness")) {
@@ -60,10 +64,11 @@ public class BasicAttack extends Ability {
 		
 	}
 	
+	//Calculate Demon dealing damage to player
 	public int calculateDamageOrHealing(Demon demon) {
 		
 		if (scalingStat.equals("friskiness")) {
-			damage = (int)(demon.getFriskiness() * -.10);
+			damage = (int)(demon.getFriskiness() * -.15);
 			
 		}
 		

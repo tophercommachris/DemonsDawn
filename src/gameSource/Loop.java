@@ -3,8 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+import demons.Demon;
 import pc.Edgelord;
-import pc.OldPLayerCharacter;
 import pc.PlayerCharacter;
 import pc.SpellBlade;
 import pc.Stats;
@@ -16,7 +16,7 @@ public class Loop {
 	static int choice = -1;
 	
 	static String[] nameHolder = new String[2];
-	static Logic logic;
+	Logic logic;
 	Scanner sc = new Scanner(System.in);
 	
 	
@@ -26,21 +26,28 @@ public class Loop {
 		gameLoop();
 	}
 	
+
+	public void initializeGame() throws InterruptedException, IOException, FileNotFoundException {
+		Objects.createDemons();
+		Objects.createRooms();
+		logic = new Logic();
+	}
+	
 	
 	
 	//This is the loop which controls the entirety of the game.  
 	
 	private void gameLoop() throws InterruptedException{
+		int location = logic.player.getLocation();
+		ArrayList<Demon> demonHold = new ArrayList<Demon>();
+		demonHold = Objects.rooms.get(location).getRoomDemons();
+		String[] nameDesc = new String[2];
+		int i;
 		 //Set to four max because rooms cannot have more than 4 exits total
 		
 		System.out.println("\n\n\nGame initializing...");
 		
 		while (end != -1) {
-			
-			if (logic.player.getLocation() == 1) { //Starting the game, the temple description and everything else
-				
-				
-			}
 			
 			System.out.println("\nWhat would you like to do? 1. Look Around 2. Check Stats 3. Look At Inventory 4. Attack Demons In The Room 5. Talk To The Shopkeep 6. Quit Game \n");
 			choice = sc.nextInt();
@@ -50,7 +57,8 @@ public class Loop {
 			if (choice == 1) {
 				System.out.println("\nHere's what you see:");
 				lookAround();
-				Objects.rooms.get(logic.player.getLocation()).checkForDemons();
+				Objects.rooms.get(location).checkForDemons();
+				Objects.rooms.get(location).describeDemons();
 				System.out.print("Would you like to take one of the exits?");
 				takeExit();
 				
@@ -66,14 +74,32 @@ public class Loop {
 			}
 			
 			else if (choice == 4) {
-				if(Objects.rooms.get(logic.player.getLocation()).checkForDemons()) 
-					startEncounter();
+				if(Objects.rooms.get(location).checkForDemons()) {
+					Objects.rooms.get(location).describeDemons();
+					System.out.println("Would you like to attack a Demon, or Take An Exit?");
+					
+					for (i = 1; i <= demonHold.size(); i++) {
+						nameDesc = demonHold.get(i-1).getNameDesc();
+						System.out.println((i) + ": " + nameDesc[0]);
+					}
+					
+					System.out.println((i) + ": Don't Attack A Demon");
+					choice = sc.nextInt();
+					
+					if (choice == i) {
+						System.out.println("You stay your hand for now");
+					}
+					
+					else {
+					startEncounter(logic.player, choice);
+					}
+				}
 			
-				if (!Objects.rooms.get(logic.player.getLocation()).checkForDemons())
+				if (!Objects.rooms.get(location).checkForDemons()) {
 					System.out.println("Nothing to Attack");
+				}
 				
-				
-			}
+			} //End Choice 4
 			
 			else if (choice == 5) {
 				
@@ -97,28 +123,54 @@ public class Loop {
 		
 	}//End Loop Method
 	
-	public void initializeGame() throws InterruptedException, IOException, FileNotFoundException {
-		Objects.createDemons();
-		Objects.createRooms();
-		logic = new Logic();
-	}
 	
 	//Method to start the encounter when running into a demon.  Parameter uses temporary stats to make up for stats that alter the value of stats
-	public void startEncounter() throws InterruptedException {
-		int roundCounter =1;
+	public void startEncounter(PlayerCharacter player, int index) throws InterruptedException {
+		int location = player.getLocation();
+		index -= 1;
 		boolean enemyDead = false;
+		ArrayList<Demon> demonHold = Objects.rooms.get(location).getRoomDemons();
 		
 		
-		while (!enemyDead) {
+		for (int roundCounter = 1; !enemyDead; roundCounter++) {
 			
-			System.out.println("What would you like to do? 1. Attack 2. Use an Item 3. Attempt to flee 4. Check Stats");
+			System.out.println("What would you like to do? 1. Attack 2. Use an Item 3. Attempt to flee 4. Check Demon Stats 5. Check Stats");
 			choice = sc.nextInt();
 			
 			
 			//Have both the player object and demon object be passed, so the ability knows which health to change, since it is all passed by reference
 			if (choice == 1) {
 				
+				player.useAbility(player, demonHold.get(index));
+				demonHold.get(index).useAbility(demonHold.get(index), player);
 				
+				demonHold.get(index).displayStats();
+				
+				if (demonHold.get(index).getCurrentHealth() <= 0) {
+					enemyDead = true;
+					player.changeXP(demonHold.get(index).getXP());
+					Objects.rooms.get(location).killDemon(index);
+					if (player.getMaxXP() >= player.getXP())
+						player.levelUp();
+				}
+				
+				
+			}
+			
+			else if (choice == 2) {
+				
+			}
+			
+			else if (choice == 3) {
+				
+			}
+			
+			else if (choice == 4) {
+				demonHold.get(index).displayStats();
+			}
+			
+			else if (choice == 5) {
+				player.displayStats();
 			}
 			
 		}

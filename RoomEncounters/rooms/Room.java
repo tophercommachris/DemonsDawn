@@ -28,7 +28,7 @@ public class Room {
 	
 	public boolean checkForDemons() {
 		boolean demonsInRoom = false;
-		String[] nameDescHolder = new String[2];
+		
 			if (roomDemons.isEmpty()) {
 				System.out.println("\nThere are no demons in the room\n");
 				demonsInRoom = false;
@@ -36,18 +36,32 @@ public class Room {
 			}
 			else {
 				System.out.println("There are " + (roomDemons.size()) + " demon(s) in the room\n");
-				for (int i = 0; i < roomDemons.size(); i++) {
-					nameDescHolder = roomDemons.get(i).getNameDesc();
-
-					System.out.print((i+1) + ": " + nameDescHolder[0] + "- ");
-					System.out.println(nameDescHolder[1] + "\n\n");
-				} //End For Loop
 				demonsInRoom = true;
 			} //End Else
 			
 			return demonsInRoom;
 		
 	} // End checkForDemons
+	
+	public void describeDemons() {
+		String[] nameDescHolder = new String[2];
+		
+		for (int i = 0; i < roomDemons.size(); i++) {
+			nameDescHolder = roomDemons.get(i).getNameDesc();
+
+			System.out.print((i+1) + ": " + nameDescHolder[0] + "- ");
+			System.out.println(nameDescHolder[1] + "\n\n");
+		} //End For Loop
+	}
+	
+	public void killDemon(int index) {
+		roomDemons.remove(index);
+	}
+	
+	public ArrayList getRoomDemons() {
+		
+		return roomDemons;
+	}
 	
 	public int getRoomNumber() {
 		return roomNumber;

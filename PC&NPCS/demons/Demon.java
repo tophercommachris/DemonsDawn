@@ -1,5 +1,6 @@
 package demons;
 import demons.DemonStats;
+import pc.PlayerCharacter;
 import baseabilities.Ability;
 
 import java.util.HashMap;
@@ -45,7 +46,7 @@ public void addAbilities() {
 	}
 
 
-	public void useAbility() {
+	public void useAbility(Demon demon, PlayerCharacter player) {
 		System.out.println("Use Ability Not Overriden");
 	
 	}

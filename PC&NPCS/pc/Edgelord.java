@@ -1,5 +1,6 @@
 package pc;
 
+import demons.Demon;
 import edgelord.EdgelordAbilityBuilder;
 
 public class Edgelord extends PlayerCharacter {
@@ -59,8 +60,8 @@ public class Edgelord extends PlayerCharacter {
 	
 	//Does Use Ability even need to be overriden?
 	@Override 
-	public void useAbility(PlayerCharacter player) {
-		
+	public void useAbility(PlayerCharacter player, Demon demon) {
+		abilityMap.get(0).callAbility(player, demon);
 	}
 	
 	

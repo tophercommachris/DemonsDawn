@@ -7,6 +7,8 @@ package pc;
 
 import java.util.Scanner;
 import baseabilities.*;
+import demons.Demon;
+
 import java.util.ArrayList;
 import spellblade.SBAbilityCreator;
 import java.util.HashMap;
@@ -79,7 +81,7 @@ public class PlayerCharacter {
 		}
 	
 		
-	public void useAbility(PlayerCharacter player) {
+	public void useAbility(PlayerCharacter player, Demon demon) {
 		System.out.println("Use Ability Not Overriden");
 			
 		}
@@ -109,6 +111,7 @@ public class PlayerCharacter {
 		}
 		
 	public void changeCurrentHealth(int change) {
+		System.out.println("PLAYER HEALTH CHANGE: " + change);
 			
 			if (stats.currentHealth + change > stats.maxHealth)
 				stats.currentHealth = stats.maxHealth;

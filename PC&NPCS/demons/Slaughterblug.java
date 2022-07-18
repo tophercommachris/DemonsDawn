@@ -1,5 +1,7 @@
 package demons;
 
+import java.util.Random;
+
 import baseabilities.BasicAttack;
 import demonAbilities.*;
 import pc.PlayerCharacter;
@@ -22,6 +24,8 @@ public class Slaughterblug extends Demon{
 			.setXp(5)
 			.build();
 	
+		addAbilities();
+	
 		stats.name = "Slaughterblug";
 		stats.desc = "Slimy demons, mostly composed of decomposing corpses the swallow into their body. They are known for their deceptive speed";
 	}
@@ -32,8 +36,17 @@ public class Slaughterblug extends Demon{
 	}
 
 	
-public void useAbility(Demon demon) {
-	abilityMap.get(0).callAbility(demon);
+	public void useAbility(Demon demon, PlayerCharacter player) {
+		Random rand = new Random();
+		int num;
+		
+		num = rand.nextInt((100-1))+1;
+		
+		if (num <= 70)
+		abilityMap.get(0).callAbility(demon, player);
+		
+		else if (num >= 71)
+		abilityMap.get(1).callAbility(demon,player);
 		
 	}
 

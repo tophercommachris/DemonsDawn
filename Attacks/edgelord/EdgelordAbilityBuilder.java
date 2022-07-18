@@ -1,5 +1,5 @@
 package edgelord;
-import baseabilities.Ability;
+import baseabilities.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,8 +8,9 @@ public class EdgelordAbilityBuilder {
 	HashMap<Integer, Ability> edgelordAbilities = new HashMap<>(20);
 	
 	public EdgelordAbilityBuilder() {	
-	edgelordAbilities.put(0, new Hmmph());
-	edgelordAbilities.put(1, new TruckKun());
+	edgelordAbilities.put(0, new BasicAttack("buffness"));
+	edgelordAbilities.put(1, new Hmmph());
+	edgelordAbilities.put(2, new TruckKun());
 	}
 	
 	

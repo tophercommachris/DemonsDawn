@@ -1,6 +1,7 @@
 package edgelord;
 
 import baseabilities.Ability;
+import demons.Demon;
 import pc.PlayerCharacter;
 
 public class Hmmph extends Ability{
@@ -33,7 +34,7 @@ public class Hmmph extends Ability{
 	}
 	
 	@Override
-	public void callAbility(PlayerCharacter player) {
+	public void callAbility(PlayerCharacter player, Demon demon) {
 		System.out.println(flavor);
 		alterStats(player);
 	}

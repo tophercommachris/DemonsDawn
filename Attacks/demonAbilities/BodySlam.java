@@ -4,13 +4,14 @@ import baseabilities.Ability;
 import demons.Demon;
 import pc.PlayerCharacter;
 
-public class BloodRush extends Ability {
+public class BodySlam extends Ability{
 	
-	public BloodRush() {
-		flavor = "The demon rushes towards you with a ravenous fury, blood seems to trail behind it as it rears back to crush your bones.";
-		name = "Bloodrush";
-		ID = "bloodrush";
-		scalingStat = "friskiness";
+	
+	public BodySlam() {
+		flavor = "The demon jumps towards you, it's body crushing against you with a force that could break bones";
+		name = "Body Slam";
+		ID = "bodyslam";
+		scalingStat = "buffness";
 		
 		instantCast = true;
 		doesDamage = true;
@@ -19,7 +20,7 @@ public class BloodRush extends Ability {
 		magicDamage = false;
 		instantKillChance = false;
 		
-		manaCost = 1;
+		manaCost = 0;
 		damage = 0;
 		restoration = 0;
 		baseHitChance = .95;
@@ -33,6 +34,9 @@ public class BloodRush extends Ability {
 		roundsTillActivated = 0;
 	}
 	
+	
+	
+	
 	@Override
 	public void callAbility(Demon demon, PlayerCharacter player) {
 		System.out.println(flavor);
@@ -42,7 +46,7 @@ public class BloodRush extends Ability {
 	@Override
 	public int calculateDamageOrHealing(Demon demon) {
 		
-		damage = (int) (demon.getFriskiness() * (-.30));
+		damage = (int) (demon.getBuffness() * (-.40));
 		
 		return damage;
 	}

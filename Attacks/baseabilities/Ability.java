@@ -43,11 +43,11 @@ public abstract class Ability implements AbilityMethods {
 	protected int roundsTillActivated;
 	
 	//This method is overridden and called for every ability, instead of having to call the method that is specific to the ability, the subclass customizes which method it calls
-	public void callAbility(PlayerCharacter player) {
+	public void callAbility(PlayerCharacter player, Demon demon) {
 		System.out.println("Call Ability Player Method Not Overridden");
 	}
 	
-	public void callAbility(Demon demon) {
+	public void callAbility(Demon demon, PlayerCharacter player) {
 		System.out.println("Call Ability Demon Not Overriden");
 	}
 	
