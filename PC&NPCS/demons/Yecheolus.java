@@ -33,22 +33,22 @@ public class Yecheolus extends Demon{
 	
 	
 	public void addAbilities() { 
-		abilityMap.put(0, new BasicAttack("buffness"));
-		abilityMap.put(1, new BodySlam());
+		abilityMap.put(0, new BodySlam());
+		abilityMap.put(1, new GaseousBurst());
 	}
 
 	
-	public void useAbility(Demon demon, PlayerCharacter player) {
+	public void useAbility(PlayerCharacter player, Demon demon) {
 		Random rand = new Random();
 		int num;
 		
 		num = rand.nextInt((100-1))+1;
 		
 		if (num <= 50)
-		abilityMap.get(0).callAbility(demon, player);
+		abilityMap.get(0).callAbility(player, demon);
 		
 		else if (num >= 51)
-		abilityMap.get(1).callAbility(demon,player);
+		abilityMap.get(1).callAbility(player,demon);
 		
 	}
 

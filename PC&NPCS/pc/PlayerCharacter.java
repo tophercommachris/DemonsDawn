@@ -8,20 +8,22 @@ package pc;
 import java.util.Scanner;
 import baseabilities.*;
 import demons.Demon;
+import edgelord.Hmmph;
 
 import java.util.ArrayList;
-import spellblade.SBAbilityCreator;
+import spellblade.SBAbilityBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PlayerCharacter {
 	
-	PlayerCharacter player;
+	
 	Stats stats;
 	int location = 1;
-	Map<Integer, Ability> abilityMap = new HashMap<>(20);
-	
-	
+	HashMap<Integer, Ability> abilityMap = new HashMap<>(20);
+	ArrayList<Ability> debuffs = new ArrayList<Ability>();
+	ArrayList<Ability> buffs = new ArrayList<Ability>();
+		
 	public void setChoice(String choice) {
 		stats.choice = choice;
 	}
@@ -47,6 +49,7 @@ public class PlayerCharacter {
 	}
 	
 	
+	
 	//Displays all the stats made by the stats class
 		public void displayStats() throws InterruptedException {
 			
@@ -67,6 +70,17 @@ public class PlayerCharacter {
 			//Thread.sleep(3000);
 			
 		}
+		
+		public void combatUpdate() {
+			for (int i = 0; i < buffs.size(); i++) {
+				if (buffs.get(i).buffActive())
+					buffs.remove(i);
+				else
+				buffs.get(i).deincrementTimer(this);
+			}
+		}
+		
+		
 	
 //All Methods Below are overriden by the subclasses of PlayerCharacter
 //__________________________________________________________________________________________________________________________________________________________________________________________
@@ -81,11 +95,10 @@ public class PlayerCharacter {
 		}
 	
 		
-	public void useAbility(PlayerCharacter player, Demon demon) {
+	public void useAbility(int index, PlayerCharacter player, Demon demon) {
 		System.out.println("Use Ability Not Overriden");
 			
 		}
-		
 	
 	
 	
@@ -110,8 +123,28 @@ public class PlayerCharacter {
 			return stats.currentHealth;
 		}
 		
+	//Methods are overloaded for if its damage, or healing, dealing with negative numbers
 	public void changeCurrentHealth(int change) {
+			System.out.println("PLAYER HEALTH CHANGE: " + change);
+					
+				if (stats.currentHealth + change > stats.maxHealth)
+					stats.currentHealth = stats.maxHealth;
+				else if (stats.currentHealth + change < 0)
+					stats.currentHealth = 0;
+				else
+					stats.currentHealth += change;
+			}
+		
+	public void changeCurrentHealth(int change, boolean magical) {
 		System.out.println("PLAYER HEALTH CHANGE: " + change);
+		
+		if (magical)
+		{
+			change -= (int)(change * (stats.magicResist/100));
+		}
+		
+		else
+			change -= (int)(change * (stats.physicalResist/100));
 			
 			if (stats.currentHealth + change > stats.maxHealth)
 				stats.currentHealth = stats.maxHealth;
@@ -285,6 +318,19 @@ public class PlayerCharacter {
 	
 	public Stats getStats() {
 		return stats;
+	}
+	
+	public HashMap<Integer,Ability> getAbilityMap() {
+		return abilityMap;
+	}
+
+	public void addBuff(Buff buff) {
+		buffs.add(buff);
+		
+	}
+	
+	public void addDebuff(Debuff debuff) {
+		debuffs.add(debuff);
 	}
 	
 

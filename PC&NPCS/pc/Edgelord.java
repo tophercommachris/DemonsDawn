@@ -1,5 +1,7 @@
 package pc;
 
+import baseabilities.Buff;
+import baseabilities.Debuff;
 import demons.Demon;
 import edgelord.EdgelordAbilityBuilder;
 
@@ -58,10 +60,17 @@ public class Edgelord extends PlayerCharacter {
 		
 	}
 	
-	//Does Use Ability even need to be overriden?
+	//Does Use Ability even need to be overridden?
 	@Override 
-	public void useAbility(PlayerCharacter player, Demon demon) {
-		abilityMap.get(0).callAbility(player, demon);
+	public void useAbility(int index, PlayerCharacter player, Demon demon) {
+		
+		if (abilityMap.get(index) instanceof Buff) {
+			abilityMap.get(index).callAbility(player);
+		}
+		
+		//May have to change structure to allow for debuffs as well, though debuffs will change demon stats as well, so the else statement may be enough
+		else
+		abilityMap.get(index).callAbility(player, demon);
 	}
 	
 	

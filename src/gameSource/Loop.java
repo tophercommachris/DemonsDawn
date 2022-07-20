@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+import baseabilities.Ability;
 import demons.Demon;
 import pc.Edgelord;
 import pc.PlayerCharacter;
@@ -124,12 +125,14 @@ public class Loop {
 	}//End Loop Method
 	
 	
-	//Method to start the encounter when running into a demon.  Parameter uses temporary stats to make up for stats that alter the value of stats
+	//Method to start the encounter when running into a demon.  Index is the choice of demon to attack, using the ArrayList of demons
 	public void startEncounter(PlayerCharacter player, int index) throws InterruptedException {
 		int location = player.getLocation();
 		index -= 1;
+		boolean combatFlag = false;
 		boolean enemyDead = false;
 		ArrayList<Demon> demonHold = Objects.rooms.get(location).getRoomDemons();
+		HashMap<Integer, Ability> abilityMap = logic.player.getAbilityMap();
 		
 		
 		for (int roundCounter = 1; !enemyDead; roundCounter++) {
@@ -141,8 +144,14 @@ public class Loop {
 			//Have both the player object and demon object be passed, so the ability knows which health to change, since it is all passed by reference
 			if (choice == 1) {
 				
-				player.useAbility(player, demonHold.get(index));
-				demonHold.get(index).useAbility(demonHold.get(index), player);
+				System.out.println("What attack would you like to use?");
+				
+				for (int i = 0; i < abilityMap.size(); i++) {
+					System.out.println((i+1) + ": " + abilityMap.get(i).getAbilityName());
+				}
+				choice = sc.nextInt() -1;
+				player.useAbility(choice, player, demonHold.get(index));
+				demonHold.get(index).useAbility(player, demonHold.get(index));
 				
 				demonHold.get(index).displayStats();
 				
@@ -153,7 +162,7 @@ public class Loop {
 					if (player.getMaxXP() >= player.getXP())
 						player.levelUp();
 				}
-				
+				combatFlag = true;
 				
 			}
 			
@@ -173,10 +182,15 @@ public class Loop {
 				player.displayStats();
 			}
 			
-		}
+			if (combatFlag) {
+				player.combatUpdate();
+				combatFlag = false;
+			}
+			
+		}// End while Loop
 		
 		
-	}
+	} // End Combat Method
 	
 	public void checkInventory() {
 		
@@ -186,18 +200,19 @@ public class Loop {
 	//This method uses iterators to iterate through the Static Objects Arraylists that hold all the information regarding the map of the game, as well as the different exits each room is connected to
 	//The game uses numbers assigned to each room, and the player's location is based on the number for indexing in the array list, hence why logic.player.getLocation returns the proper room
 	public void lookAround() {
-		Iterator<String> descIterator = Objects.rooms.get(logic.player.getLocation()).getRoomDesc().iterator();
-		Iterator<String> exitIterator = Objects.rooms.get(logic.player.getLocation()).getRoomExit().iterator();
+		int location = logic.player.getLocation();
+		Iterator<String> descIterator = Objects.rooms.get(location).getRoomDesc().iterator();
+		Iterator<String> exitIterator = Objects.rooms.get(location).getRoomExit().iterator();
 		String roomName;
 		
-		roomName = Objects.rooms.get(logic.player.getLocation()).getRoomName();
+		roomName = Objects.rooms.get(location).getRoomName();
 		System.out.println(roomName);
 		System.out.println("--------------------------------");
 		while(descIterator.hasNext()) {
 			System.out.println(descIterator.next());
 		}
 		
-		System.out.println("\n\nThere are " + Objects.rooms.get(logic.player.getLocation()).getNumExits() + " exit(s) in this room");
+		System.out.println("\n\nThere are " + Objects.rooms.get(location).getNumExits() + " exit(s) in this room");
 		while (exitIterator.hasNext()) {
 			System.out.println(exitIterator.next());
 		}
@@ -208,12 +223,13 @@ public class Loop {
 	//Using the integer that marks the current room number the player is in, the for loop iterates through all the exits in the exit Arraylist in the Objects class
 	//It then asks if the player wants to take an exit or stay in the room, if the player takes an exit, it then sets the location of the player to the room based on the roomID
 	public void takeExit() {
+		int location = logic.player.getLocation();
 		int i;
 		String[] exitID = new String[4]; //Set to four because a room cannot have more than 4 exits total
 		
-		for (i = 0; i < Objects.rooms.get(logic.player.getLocation()).getNumExits(); i++) {
-			exitID[i] = Objects.rooms.get(logic.player.getLocation()).getExitIDs(i);
-			System.out.print(" " + (i+1)  + ". " + Objects.rooms.get(logic.player.getLocation()).getExit(i));
+		for (i = 0; i < Objects.rooms.get(location).getNumExits(); i++) {
+			exitID[i] = Objects.rooms.get(location).getExitIDs(i);
+			System.out.print(" " + (i+1)  + ". " + Objects.rooms.get(location).getExit(i));
 		}
 		System.out.println(" " + (i+1) + ". Stay Here");
 		choice = sc.nextInt();

@@ -1,10 +1,13 @@
 package edgelord;
 
 import baseabilities.Ability;
+import baseabilities.Buff;
 import demons.Demon;
 import pc.PlayerCharacter;
 
-public class Hmmph extends Ability{
+public class Hmmph extends Buff{
+	
+
 	
 	public Hmmph() {
 		
@@ -13,36 +16,29 @@ public class Hmmph extends Ability{
 		name = "Hmmph";
 		ID = "hmmph";
 		scalingStat = "edginess";
-		
+		alteredStats.add("magicResist");
+		alteredStats.add("physicalResist");
 		instantCast = true;
-		doesDamage = false;
-		altersStats = true;
-		magicDamage = false;
-		instantKillChance = false;
-		
 		manaCost = 4;
-		damage = 0;
-		restoration = 0;
-		baseHitChance = 1;
 		abilityCooldown = 2;
-		abilityDuration = 2;
-		
-		alterAmount = 30;
-		alterRoundDuration = 2;
-		
-		roundsTillActivated = 0;
+		buffDuration = 2;
+		buffAmount = 0;
+	
+
 	}
 	
 	@Override
-	public void callAbility(PlayerCharacter player, Demon demon) {
+	public void callAbility(PlayerCharacter player) {
 		System.out.println(flavor);
+		player.addBuff(this);
 		alterStats(player);
 	}
 	
 	@Override
 	public void alterStats(PlayerCharacter player) {
-		player.changeMagicResist(player.getEdginess());
-		player.changePhysicalResist(player.getEdginess());
+		buffAmount = player.getEdginess();
+		player.changeMagicResist(buffAmount);
+		player.changePhysicalResist(buffAmount);
 		
 	}
 

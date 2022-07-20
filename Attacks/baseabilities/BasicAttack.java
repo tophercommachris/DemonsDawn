@@ -16,7 +16,6 @@ public class BasicAttack extends Ability {
 		instantCast = true;
 		doesDamage = true;
 		doesHealing = false;
-		altersStats = false;
 		magicDamage = false;
 		instantKillChance = false;
 		
@@ -26,11 +25,7 @@ public class BasicAttack extends Ability {
 		baseHitChance = 0;
 		abilityCooldown = 0;
 		abilityDuration = 0;
-		alteredStat = "";
-		
-		alterAmount = 0;
-		alterRoundDuration = 0;
-		
+	
 		roundsTillActivated = 0;
 
 		
@@ -39,15 +34,9 @@ public class BasicAttack extends Ability {
 	@Override
 	public void callAbility(PlayerCharacter player, Demon demon) {
 		System.out.println(flavor);
-		demon.changeCurrentHealth(calculateDamageOrHealing(player));
+		demon.changeCurrentHealth(calculateDamageOrHealing(player), magicDamage);
 	}
 	
-	//Call Ability Method for Demon Dealing Damage To Player
-	@Override
-	public void callAbility(Demon demon, PlayerCharacter player) {
-		System.out.println("The Demon Swings Basically");
-		player.changeCurrentHealth(calculateDamageOrHealing(demon));
-	}
 	
 	//Calculate player dealing damage to demon
 	public int calculateDamageOrHealing(PlayerCharacter player) {
@@ -60,23 +49,10 @@ public class BasicAttack extends Ability {
 		else if (scalingStat.equals("buffness")) {
 			damage = (int)(player.getBuffness() * -.40);
 		}
+		System.out.println("Damage:" + damage);
 		return damage;
 		
 	}
 	
-	//Calculate Demon dealing damage to player
-	public int calculateDamageOrHealing(Demon demon) {
-		
-		if (scalingStat.equals("friskiness")) {
-			damage = (int)(demon.getFriskiness() * -.15);
-			
-		}
-		
-		else if (scalingStat.equals("buffness")) {
-			damage = (int)(demon.getBuffness() * -.30);
-		}
-		
-		return damage;
-	}
 
 }

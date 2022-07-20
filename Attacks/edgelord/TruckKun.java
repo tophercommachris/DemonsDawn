@@ -19,7 +19,6 @@ public class TruckKun extends Ability{
 		
 		instantCast = true;
 		doesDamage = true;
-		altersStats = false;
 		magicDamage = false;
 		instantKillChance = true;
 		
@@ -30,8 +29,7 @@ public class TruckKun extends Ability{
 		abilityCooldown = 6;
 		abilityDuration = 0;
 		
-		alterAmount = 0;
-		alterRoundDuration = 0;
+		
 		
 		roundsTillActivated = 0;
 	}
@@ -39,15 +37,15 @@ public class TruckKun extends Ability{
 	@Override
 	public void callAbility(PlayerCharacter player, Demon demon) {
 		System.out.println(flavor);
-		calculateDamageOrHealing(player);
+		demon.changeCurrentHealth(calculateDamageOrHealing(player), magicDamage);
 	}
 	
 	@Override
 	public int calculateDamageOrHealing(PlayerCharacter player) {
 		
-		if(rand.nextInt(100) <= 5) {
+		if(rand.nextInt(100) <= 1) {
 			damage = -9999;
-			System.out.println("It seems that Truck-Kun has claimed another victim, the demon vaporizes into another world");
+			System.out.println("It seems that Truck-Kun has claimed another victim, the demon get's Isekai'd into another world");
 		}
 		else {
 		

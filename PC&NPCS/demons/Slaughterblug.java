@@ -19,8 +19,8 @@ public class Slaughterblug extends Demon{
 			.setBrainpower(2)
 			.setEdginess(1)
 			.setLuck(1)
-			.setMagicResist(0)
-			.setPhysicalResist(0)
+			.setMagicResist(2)
+			.setPhysicalResist(2)
 			.setXp(5)
 			.build();
 	
@@ -31,22 +31,22 @@ public class Slaughterblug extends Demon{
 	}
 			 
 	public void addAbilities() { 
-		abilityMap.put(0, new BasicAttack("friskiness"));
+		abilityMap.put(0, new BodySlam());
 		abilityMap.put(1, new BloodRush());
 	}
 
 	
-	public void useAbility(Demon demon, PlayerCharacter player) {
+	public void useAbility(PlayerCharacter player, Demon demon) {
 		Random rand = new Random();
 		int num;
 		
 		num = rand.nextInt((100-1))+1;
 		
 		if (num <= 70)
-		abilityMap.get(0).callAbility(demon, player);
+		abilityMap.get(0).callAbility(player, demon);
 		
 		else if (num >= 71)
-		abilityMap.get(1).callAbility(demon,player);
+		abilityMap.get(1).callAbility(player, demon);
 		
 	}
 

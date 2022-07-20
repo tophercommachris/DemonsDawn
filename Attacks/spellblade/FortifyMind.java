@@ -15,7 +15,6 @@ public class FortifyMind extends Ability {
 		
 		instantCast = true;
 		doesDamage = false;
-		altersStats = true;
 		magicDamage = false;
 		
 		manaCost = 4;

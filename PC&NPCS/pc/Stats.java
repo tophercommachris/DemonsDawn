@@ -30,7 +30,11 @@ public class Stats {
 	protected int maxXP = 10;
 	protected int level = 1;
 	
-	Stats(int maxHealth, int maxMana, int currentHealth, int currentMana, int goldAmount, int buffness,
+	public Stats() {
+		
+	}
+	
+	public Stats(int maxHealth, int maxMana, int currentHealth, int currentMana, int goldAmount, int buffness,
 			int friskiness, int brainpower, int edginess, int luck,
 			int magicResist, int physicalResist, int xp) {
 		
@@ -52,7 +56,6 @@ public class Stats {
 	
 	
 	//Called by logic to create a name and title for character after class is chosen
-	
 	
 	
 	

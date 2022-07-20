@@ -15,7 +15,7 @@ public class BloodRush extends Ability {
 		instantCast = true;
 		doesDamage = true;
 		doesHealing = false;
-		altersStats = false;
+	
 		magicDamage = false;
 		instantKillChance = false;
 		
@@ -25,18 +25,14 @@ public class BloodRush extends Ability {
 		baseHitChance = .95;
 		abilityCooldown = 0;
 		abilityDuration = 0;
-		alteredStat = "";
-		
-		alterAmount = 0;
-		alterRoundDuration = 0;
 		
 		roundsTillActivated = 0;
 	}
 	
 	@Override
-	public void callAbility(Demon demon, PlayerCharacter player) {
+	public void callAbility(PlayerCharacter player, Demon demon) {
 		System.out.println(flavor);
-		player.changeCurrentHealth(calculateDamageOrHealing(demon));
+		player.changeCurrentHealth(calculateDamageOrHealing(demon), magicDamage);
 	}
 	
 	@Override

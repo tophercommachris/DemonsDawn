@@ -8,6 +8,8 @@
 
 
 package baseabilities;
+import java.util.ArrayList;
+
 import demons.Demon;
 import pc.PlayerCharacter;
 
@@ -22,10 +24,10 @@ public abstract class Ability implements AbilityMethods {
 	protected String ID;
 	protected String scalingStat;
 	
+	
 	protected boolean instantCast = true;
 	protected boolean doesDamage = false;
 	protected boolean doesHealing = false;
-	protected boolean altersStats = false;
 	protected boolean magicDamage = false;
 	protected boolean instantKillChance = false; //Only Edgelord and Fool Abilities will have this be true
 	
@@ -35,20 +37,19 @@ public abstract class Ability implements AbilityMethods {
 	protected double baseHitChance;
 	protected int abilityCooldown;
 	protected int abilityDuration;
-	protected String alteredStat;
-	
-	protected double alterAmount;
-	protected int alterRoundDuration;
+	protected int buffDuration;
+	protected int buffAmount;
 	
 	protected int roundsTillActivated;
+	protected ArrayList<String> alteredStats = new ArrayList<String>();
 	
 	//This method is overridden and called for every ability, instead of having to call the method that is specific to the ability, the subclass customizes which method it calls
 	public void callAbility(PlayerCharacter player, Demon demon) {
-		System.out.println("Call Ability Player Method Not Overridden");
+		System.out.println("Call Ability Player Method (Double) Not Overridden");
 	}
 	
-	public void callAbility(Demon demon, PlayerCharacter player) {
-		System.out.println("Call Ability Demon Not Overriden");
+	public void callAbility(PlayerCharacter player) {
+		System.out.println("Call Ability Player Method (Single) Not Overriden");
 	}
 	
 	 public void determineAbilityMethod() {		
@@ -88,6 +89,32 @@ public abstract class Ability implements AbilityMethods {
 		return -1;
 		
 	}
+	
+	public String getAbilityName() {
+		return name;
+	}
+	
+	
+	//Methods for Handling Buffs
+	//_____________________________________________________________________________________________________________________________________________________________________________________
+	public void deincrementTimer(PlayerCharacter player) {
+		System.out.println("deincrementTimer Not Overriden");
+	}
+	
+	public void checkBuff(PlayerCharacter player) {
+		System.out.println("Check Buff Not Overriden");
+		
+	}
+	
+	public void reverseBuff(PlayerCharacter player) {
+		System.out.println("reverseBuff not overriden");
+	} //End reverseBuff Method
+
+	public boolean buffActive() {
+		System.out.println("Buff Active Not Overriden");
+		return false;
+	}
+	
 
 }
 

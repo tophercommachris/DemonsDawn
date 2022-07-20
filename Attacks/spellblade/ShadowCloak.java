@@ -18,7 +18,6 @@ public class ShadowCloak extends Ability {
 		
 		instantCast = true;
 		doesDamage = false;
-		altersStats=true;
 		magicDamage = false;
 		
 		manaCost = 5;
@@ -27,9 +26,7 @@ public class ShadowCloak extends Ability {
 		baseHitChance = 100;
 		abilityCooldown = 3;
 		abilityDuration = 1;
-		
-		alterAmount = 1;
-		alterRoundDuration = 1;
+	
 		
 		roundsTillActivated = 0;
 		

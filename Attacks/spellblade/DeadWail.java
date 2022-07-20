@@ -16,7 +16,7 @@ public class DeadWail extends Ability {
 		
 		instantCast = false;
 		doesDamage = true;
-		altersStats = false;
+	
 		magicDamage = false;
 		
 		manaCost = 8;
@@ -26,8 +26,6 @@ public class DeadWail extends Ability {
 		abilityCooldown = 5;
 		abilityDuration = 0;
 		
-		alterAmount = 0;
-		alterRoundDuration = 0;
 		
 		roundsTillActivated = 3;
 		

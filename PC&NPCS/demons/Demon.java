@@ -11,6 +11,8 @@ public class Demon {
 	//The HashMap for demons made by the DemonInitialiizer holds the ID for each demon by a String, so no ID is required inside the Demon class
 	DemonStats stats;
 	HashMap<Integer, Ability> abilityMap = new HashMap<Integer, Ability>();
+	ArrayList<Ability> debuffs = new ArrayList<Ability>();
+	ArrayList<Ability> buffs = new ArrayList<Ability>();
 	
 	
 	
@@ -39,6 +41,8 @@ public String[] getNameDesc() {
 	return nameDesc;
 }
 
+
+
 //Overriden by the Subclasses of Demon
 //__________________________________________________________________________________________________________________________________________________________________________________________
 public void addAbilities() { 
@@ -46,7 +50,7 @@ public void addAbilities() {
 	}
 
 
-	public void useAbility(Demon demon, PlayerCharacter player) {
+	public void useAbility(PlayerCharacter player, Demon demon) {
 		System.out.println("Use Ability Not Overriden");
 	
 	}
@@ -76,8 +80,30 @@ public int getCurrentHealth() {
 	return stats.currentHealth;
 }
 
+
+//There are two different changeCurrentHealth methods in order to deal with ones that deal damage (physical or magical) or thats that simply heal
 public void changeCurrentHealth(int change) {
+	System.out.println("Demon HEALTH CHANGE: " + change);
+			
+		if (stats.currentHealth + change > stats.maxHealth)
+			stats.currentHealth = stats.maxHealth;
+		else if (stats.currentHealth + change < 0)
+			stats.currentHealth = 0;
+		else
+			stats.currentHealth += change;
+	}
+
+public void changeCurrentHealth(int change, boolean magical) {
 	
+	if (magical)
+	{
+		change += stats.magicResist;
+	}
+	
+	else
+		change -= stats.physicalResist;
+	
+	System.out.println("Demon HEALTH CHANGE: " + change);
 	if (stats.currentHealth + change > stats.maxHealth)
 		stats.currentHealth = stats.maxHealth;
 	else if (stats.currentHealth + change < 0)

@@ -5,7 +5,7 @@ import pc.PlayerCharacter;
 public interface AbilityMethods {
 	
 	public void callAbility(PlayerCharacter player, Demon demon);
-	public void callAbility(Demon demon, PlayerCharacter player);
+	public void callAbility(PlayerCharacter player);
 	public int calculateDamageOrHealing(PlayerCharacter player);
 	public void determineAbilityMethod();
 	public void alterStats(PlayerCharacter player);
