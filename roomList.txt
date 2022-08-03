@@ -1,0 +1,317 @@
+Number:1
+RoomDifficulty:1
+RoomWeight:0
+ID:temple
+Name:The Temple of Saph'Rendal
+Desc:The temple has been ransacked, what once stood the golden statue of Saph'Rendal as the plaque describes it now stands a ruined monument to what once was.
+Desc:The air is cold, and the hairs on your arm seem to stand up, though nothing is in the room
+Desc:A faint smell of sulfur permeates the air, it makes your nose burn
+Exit:The Antechamber
+ExitTo:antechamber
+-
+Number:2
+RoomWeight:2
+RoomDifficulty:3
+ID:servantchambers
+Name:The Servant Chambers
+Desc:A chamber that holds numerous cots, bags, and clothes folded onto small dressers.  They all seem neatly put away, and this room has been the cleanest so far.
+Desc:Written on the walls, in a strange green dye of some sort, you see the words "GOD HAS PUNISHED US" written upon it.
+Desc:However, everything else in the room is completely spotless.
+Exit:Kitchen
+ExitTo:kitchen
+-
+Number:3
+RoomWeight:1
+RoomDifficulty:2
+ID:bathroom
+Name:The Bathroom
+Desc:A large mirror that once hung against the wall above a very nice marble sink is now shattered.  There are no glass shards on the floor, but you can still see the broken pieces of mirror on the wall.
+Desc:They bring no reflection, which sends a small chill down your spine.  You notice the sinks seem to have glowing blue crystals on them, and when you wave your hand over it, water is produced through a faucet.
+Desc:Whoever owned this place seems to have been quite rich, seeing as enchantments like this cost a pretty penny.
+Exit:The Living Room
+ExitTo:livingroom
+-
+Number:4
+RoomWeight:1
+RoomDifficulty:3
+ID:study
+Name:The Study
+Desc:A small office, with the things you would usually expect to find.  A large desk, with various books and scrolls stuffed into the cubbies that are carved into it.  A dried up inkwell with a bright orange, red, and yellow feather sits on the desk
+Desc:A scroll is laid out, the author was clearly interrupted as there is a large streak of ink on the page.  The scholar seems to have been scripting some sort of spell, which confirms that they were a wizard.
+Desc:The description of the spell seems to have been leading to some sort of binding spell, though was in the beginning stages, and you don't know enough about magic to finish it.
+Exit:The Library
+ExitTo:library
+-
+Number:5
+RoomWeight:3
+RoomDifficulty:2
+ID:kitchen
+Name:The Kitchen
+Desc:You see three large tables, one on each side of the wall and then one in the middle, with a large brick oven in the back.
+Desc:Pots and pans hang from the ceiling on a wooden rack, with baskets and crates of various spoiled foods filling the room with a musk that is unpleasant.
+Desc:A severed hand, now skeletal, sits on the cutting board.  However, it seems to be clawed, with large sharpened bones, and eight fingers instead of five.
+Exit:The Dining Room
+ExitTo:diningroom
+Exit:The Servant Chambers
+ExitTo:servantchambers
+-
+Number:6
+RoomWeight:4
+RoomDifficulty:1
+ID:diningroom
+Name:The Dining Room
+Desc:A large table decorated in various pristine silverware, and goblets of gold filled with stagnant water.  The food on the plates seems to have rotted away, and now houses flies and maggots alike.
+Desc:You notice that where gems would have been embedded, they all seem to be plucked out, but the goblets are still on the table, untouched otherwise.
+Desc:The silver seems to have not been touched at all, even what gems may have been embedded into them.
+Exit:The Storage Room
+ExitTo:storageroom
+Exit:The Kitchen
+ExitTo:kitchen
+Exit:The Antechamber
+ExitTo:antechamber
+-
+Number:7
+RoomWeight:2
+RoomDifficulty:1
+ID:antechamber
+Name:The Antechamber
+Desc:A beautiful antechamber, decorated with paintings and drapes that splash colors of silver, gold, and ruby all along the walls.  
+Desc:Theres a particular flashiness to all of it that seems like someone was trying to prove something.
+Desc:You notice the painting on the wall is of an angel standing on a mountain above a city, but someone seems to have scratched the wings off.
+Exit:The Dining Room
+ExitTo:diningroom
+Exit:The Living Room
+ExitTo:livingroom
+-
+Number:8
+RoomWeight:3
+RoomDifficulty:1
+ID:livingroom
+Name:The Living Room
+Desc:A fireplace still burns, giving the room an odd warmth as opposed to the chilling air you're normally used to.
+Desc:Silk couches that were once a bright red now seem to be covered in burn marks, like acid was poured on them.
+Desc:The fire also seems to flicker into whites and reds, and flares with a rythym like a heartbeat.
+Exit:The Meeting Room
+ExitTo:meetingroom
+Exit:The Bathroom
+ExitTo:bathroom
+Exit:The Hallway Garden
+ExitTo:hallwaygarden
+-
+Number:9
+RoomWeight:1
+RoomDifficulty:2
+ID:hallwaygarden
+Name:The Hallway Garden
+Desc:A long hallway has two large windows on both sides, allowing you to see glimpses outside.  You notice that it's a full moon, and lovely forest surrounds you.
+Desc:You also notice the bloodbath outside the windows, as bodies torn asunder riddle the grass in crimson.  What's odd is that they still seem fresh, and the moonlight seems to shine particularly on them.
+Desc:What's more, is that the windows seem to be perfectly clean, with no dust or smears, or even blood, which should have splattered on them.
+Exit:The Library
+ExitTo:library
+Exit:The Living Room
+ExitTo:livingroom
+-
+Number:10
+RoomWeight:4
+RoomDifficulty:3
+ID:library
+Name:The Library
+Desc:A massive library appears, shaped in a circular pattern has bookshelves lining up and down the walls.  A large ladder is required to grab things from the highest shelves, five stories up.
+Desc:Such a vast amount of knowledge, must've meant that the owner here was either a true scholar of the arts, or a wizard of some kind.  It would explain how they could afford everything in this place.
+Desc:You wonder what knowledge is contained within all of the books and scrolls.
+Exit:The Study
+ExitTo:study
+Exit:The Scholar's Room
+ExitTo:scholarsroom
+-
+Number:11
+RoomWeight:1
+RoomDifficulty:2
+ID:storageroom
+Name:The Storage Room
+Desc:A stuffy storage room with various crates, barrels, bottles, and supplies.  Not a speck of dust seems to be covering the shelves or floor.
+Desc:You notice that one of the barrels is cracked open, and all the contents seem to be missing.  The only thing left is what appears to be the red stains of wine... hopefully.
+Exit:Dining Room
+ExitTo:diningroom
+-
+Number:12
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:13
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:14
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:15
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:16
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:17
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:18
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:19
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:20
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:21
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:22
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:23
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:24
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
+-
+Number:25
+RoomWeight:1
+RoomDifficulty:
+ID:
+Name:
+Desc:
+Desc:
+Desc:
+Exit:
+ExitTo:
+Exit:
+ExitTo:
