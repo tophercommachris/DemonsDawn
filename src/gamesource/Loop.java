@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import demonblueprint.BaseDemon;
+import playercharacter.BasePlayerCharacter;
+
 public class Loop {
 	static Objects objects;
 	static int end = -1;
@@ -21,6 +24,7 @@ public class Loop {
 	Scanner sc = new Scanner(System.in);
 	
 	int roomIndex = 0;
+	int demonIndex = 0;
 	
 	public Loop () throws IOException, InterruptedException {
 		objects = new Objects();
@@ -30,6 +34,7 @@ public class Loop {
 	}
 	
 	private void gameLoop() throws InterruptedException {
+		
 		
 		while (end != 1) {
 			System.out.println("\nWhat would you like to do? 1. Look Around 2. Check Stats 3. Look At Inventory 4. Attack Demons In The Room 5. Talk To The Shopkeep 6. Quit Game \n");
@@ -49,7 +54,14 @@ public class Loop {
 			}
 			
 			else if (choice == 4) {
-				logic.startCombat(Loop.objects.player);
+				
+				if(roomEmpty(objects.player))
+					System.out.println("There are no demons in this room");
+				
+				else {
+				logic.startCombat(objects.player, chooseDemon(objects.player));
+				objects.rooms.get(objects.player.getLocation()).getRoomDemons().remove(demonIndex);
+				}
 			}
 			
 			else if (choice == 5) {
@@ -63,6 +75,27 @@ public class Loop {
 		} //End While Loop
 		
 	} //End Game Loop
+	
+	public BaseDemon chooseDemon(BasePlayerCharacter player) {
+		
+		ArrayList<BaseDemon> roomDemons = objects.rooms.get(player.getLocation()).getRoomDemons();
+	
+		for (int i = 0; i < roomDemons.size(); i++) {
+			System.out.println((i+1) + ": "  + roomDemons.get(i).getName() + "- " + roomDemons.get(i).getDesc());
+			}
+			choice = sc.nextInt();
+			demonIndex = (choice-1);
+	
+		return roomDemons.get(choice-1);
+	}
+	
+	public boolean roomEmpty(BasePlayerCharacter player) {
+		
+		if (objects.rooms.get(player.getLocation()).getRoomDemons().size() == 0)
+			return true;
+		else
+			return false;
+	}
 	
 	
 	public static void main(String[] args) throws IOException, InterruptedException {

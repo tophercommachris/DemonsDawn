@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import abilitysource.BaseAbility;
+import abilitysource.*;
 import demonblueprint.BaseDemon;
 
 public abstract class BasePlayerCharacter {
@@ -21,8 +21,7 @@ public abstract class BasePlayerCharacter {
 	PlayerStats playerStats;
 	
 	HashMap<Integer, BaseAbility> abilityMap = new HashMap<>(20);
-	ArrayList<BaseAbility> debuffs = new ArrayList<BaseAbility>();
-	ArrayList<BaseAbility> buffs = new ArrayList<BaseAbility>();
+	ArrayList<BaseAbility> buffDebuffs = new ArrayList<BaseAbility>();
 	
 	String playerClassChoice = "";
 	String name = "";
@@ -37,6 +36,54 @@ public abstract class BasePlayerCharacter {
 	public void combatUpdate() {
 		
 	}
+	
+	public void addStatusEffect(BaseAbility statusEffect) {
+		buffDebuffs.add(statusEffect);
+	}
+	
+public void checkStatusEffect() {
+		
+		for (int i = 0; i < buffDebuffs.size(); i++) {
+			
+			if (buffDebuffs.get(i).durationAtZero()) {
+				System.out.println("Gets here");
+				buffDebuffs.get(i).resetDuration();
+				buffDebuffs.get(i).clearStatusEffect(this);
+				buffDebuffs.remove(i);
+			}
+			
+			else {
+				System.out.println("Stops here");
+				buffDebuffs.get(i).deincrementStatusEffect(buffDebuffs.get(i));
+			}
+		}
+		
+		
+		
+	}
+
+	public int armorReduction(String damageType) {
+		
+		if (damageType.equals("fire")) {
+			return getFireResist();
+		}
+		
+		else if (damageType.equals("ice")) {
+			return getIceResist();
+		}
+		
+		else if (damageType.equals("lightning")) {
+			return getLightningResist();
+		}
+		
+		else if (damageType.equals("physical")) {
+			return getPhysicalResist();
+		}
+		
+		else
+			return -1;
+	}
+
 	
 	
 	//Overriden Methods_____________________________________________________________________________
@@ -111,9 +158,13 @@ public abstract class BasePlayerCharacter {
 	}
 	
 
-public void changeCurrentHealth(int change) {
-		System.out.println("PLAYER HEALTH CHANGE: " + change);
-				
+public void changeCurrentHealth(int change, String damageType) {
+		
+			change += armorReduction(damageType);
+			
+			if (change > 0)
+				change = -1;
+			
 			if (playerStats.currentHealth + change > playerStats.maxHealth)
 				playerStats.currentHealth = playerStats.maxHealth;
 			else if (playerStats.currentHealth + change < 0)
@@ -122,8 +173,14 @@ public void changeCurrentHealth(int change) {
 				playerStats.currentHealth += change;
 		}
 	
-public void changeCurrentHealth() {
-	
+public void changeCurrentHealth(int change) {
+
+	if (playerStats.currentHealth + change > playerStats.maxHealth)
+		playerStats.currentHealth = playerStats.maxHealth;
+	else if (playerStats.currentHealth + change < 0)
+		playerStats.currentHealth = 0;
+	else
+		playerStats.currentHealth += change;
 	
 	}
 	
@@ -314,6 +371,12 @@ public PlayerStats getplayerStats() {
 public HashMap<Integer, BaseAbility> getAbilityMap() {
 	return abilityMap;
 }
+
+public ArrayList<BaseAbility> getbuffDebuffs() {
+	return buffDebuffs;
+}
+
+
 
 /*
 public HashMap<Integer,Ability> getAbilityMap() {

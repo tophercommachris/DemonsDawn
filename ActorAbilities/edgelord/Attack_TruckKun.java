@@ -4,11 +4,12 @@
 
 package edgelord;
 
+import abilitysource.Attack;
 import abilitysource.BaseAbility;
 import demonblueprint.BaseDemon;
 import playercharacter.BasePlayerCharacter;
 
-public class Attack_TruckKun extends BaseAbility{
+public class Attack_TruckKun extends Attack{
 	
 	public Attack_TruckKun() {
 		desc = "You summon the very thing that sent you to this wretched world. Always does a flat 50 physical damage, with a 95% chance to hit";
@@ -17,10 +18,10 @@ public class Attack_TruckKun extends BaseAbility{
 		ID = "truckkun";
 		scalingStat = "edginess";
 		abilityType = "attack";
-		manaCost = 10;
+		manaCost = -10;
 		physicalDamage = true;
-		damage = 50;
-		baseHitChance = .95;
+		damage = -50;
+		baseHitChance = 95;
 		instantCast = true;
 		
 	}
@@ -36,7 +37,7 @@ public class Attack_TruckKun extends BaseAbility{
 		
 		else if (hit && !determineInstantKill()) {
 			System.out.println("The truck clips the demon, not a head on impact, but enough to leave him wondering how the hell you did that");
-			demon.changeCurrentHealth(calculateDamage(player));
+			demon.changeCurrentHealth(calculateDamage(player), getDamageType());
 		}
 		
 		else
@@ -44,20 +45,12 @@ public class Attack_TruckKun extends BaseAbility{
 				
 	}
 	
+	@Override
 	public int calculateDamage(BasePlayerCharacter player) {
-		damage = 50;
+		System.out.println(damage);
 		return damage;
 	}
 	
-	@Override
-	public boolean determineHitOrMiss() {
-		setHitNumber(rand.nextInt(100)+1);
-		
-		if (getHitNumber() <= 95)
-			return true;
-		else
-			return false;
-	}
 	
 	
 	//5% chance to instant kill with this ability

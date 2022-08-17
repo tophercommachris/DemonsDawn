@@ -3,9 +3,7 @@ package demonblueprint;
 public class DemonStats {
 	
 	protected int maxHealth;
-	protected int maxMana;
 	protected int currentHealth;
-	protected int currentMana;
 	protected int goldAmount;
 	protected int buffness;
 	protected int friskiness;
@@ -26,14 +24,14 @@ public class DemonStats {
 		
 	}
 	
-	public DemonStats(int maxHealth, int maxMana, int currentHealth, int currentMana,
+	public DemonStats(int maxHealth, int currentHealth,
 					   int buffness, int friskiness, int brainpower, int edginess, int luck,
 					   int fireResist, int lightningResist, int iceResist, int physicalResist, int xp) {
 		
 		this.maxHealth = maxHealth;
-		this.maxMana = maxMana;
+	
 		this.currentHealth = currentHealth;
-		this.currentMana = currentMana;
+	
 		
 		this.buffness = buffness;
 		this.friskiness = friskiness;

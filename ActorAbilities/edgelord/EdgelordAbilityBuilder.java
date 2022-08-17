@@ -12,6 +12,7 @@ public class EdgelordAbilityBuilder {
 	public EdgelordAbilityBuilder() {
 		abilityMap.put(0, new Attack_TruckKun());
 		abilityMap.put(1, new Buff_Hmmph());
+		abilityMap.put(2, new Heal_PowerOfFriendship());
 		
 	}
 	

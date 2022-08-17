@@ -26,6 +26,8 @@ public abstract class BaseAbility {
 	protected int manaCost;
 	protected int abilityCooldown;
 	protected int abilityDuration;
+	//Active Ability Duration is the duration we use when in combat.  Ability duration is the static duration in the context of knowing what the duration is supposed to be.
+	protected int activeAbilityDuration;
 	protected int roundsTillActivated;
 	
 	
@@ -37,7 +39,7 @@ public abstract class BaseAbility {
 	protected boolean physicalDamage = true;
 	protected boolean instantKillChance = false; //Only Edgelord and Fool Abilities will have this be true
 	protected int damage = 0;
-	protected double baseHitChance;
+	protected int baseHitChance;
 	protected boolean instantCast = true;
 	protected boolean hit;
 	protected int instantKill;
@@ -98,10 +100,7 @@ public int determineScalingStat(BaseDemon demon) {
 		System.out.println("Couldn't find scaling stat");
 		return -1;
 	}
-	
-	
-
-	
+		
 }
 
 	public String getAbilityName() {
@@ -113,6 +112,25 @@ public int determineScalingStat(BaseDemon demon) {
 
 	public String getAbilityType() {
 		return abilityType;
+	}
+	
+	
+public String getDamageType() {
+		
+		if (fireDamage)
+			return "fire";
+		
+		else if (iceDamage)
+			return "ice";
+		
+		else if (lightningDamage)
+			return "lightning";
+		
+		else if (physicalDamage)
+			return "physical";
+		
+		else
+			return "unknown";
 	}
 	
 	
@@ -163,30 +181,83 @@ public int determineScalingStat(BaseDemon demon) {
 	}
 	
 	public int getHitNumber() {
-		return hitNumber;
+		hitNumber = rand.nextInt(100)+1;
+	
+	return hitNumber;
 	}
 
-	public void setHitNumber(int hitNumber) {
-		this.hitNumber = hitNumber;
-	}
-	
 	
 	
 	
 	//Overridden methods used by healing abilities______________________________________________
-	public void calculateHealing() {
+	public int calculateHealing(BasePlayerCharacter player) {
 		System.out.println("Calculate healing not overriden");
+		return -1;
 	}
 	
 	
-	//Overriden methods from both buff & debuff classes____________________________________________
-	public void clearStatusEffect() {
+	//Overriden methods from both buff & debuff classes_____________________________________________________________________
+	
+	public void deincrementStatusEffect(BaseAbility statusEffect) {
+		System.out.println("Deincrement Status EFfect not overriden");
+	}
+	
+	
+	public void checkStatusEffect(BaseDemon demon) {
+		System.out.println("Check Status Effect (Demon) not overriden");
+	}
+	
+	
+	public void checkStatusEffect(BasePlayerCharacter player) {
+		System.out.println("Check Status Effect (Player) not overriden");
+	}
+	
+
+	//The clear status effect REVERSES the buff/debuff given
+	public void clearStatusEffect(BasePlayerCharacter player) {
 		
 		System.out.println("Clear Status Effect not overriden");
 		
 	}
-
 	
+	public void clearStatusEffect(BaseDemon demon) {
+		
+		System.out.println("Clear Status Effect not overriden");
+		
+	}
+	
+	
+	//Methods NOT overriden by buff & debuff classes but only used for those classes
+	public void durationChange(int change) {
+		activeAbilityDuration += change;
+	}
+	
+	
+
+	public boolean durationAtZero() {
+		if (activeAbilityDuration == 0)
+			return true;
+		
+		else
+			 return false;
+	}
+
+	public void resetDuration() {
+		activeAbilityDuration = abilityDuration;
+	}
+	
+	public int getDuration() {
+		return activeAbilityDuration;
+	}
+	
+	public void checkBuffDebuffDuration(BasePlayerCharacter player) {
+		System.out.println("Check Buff Debuff Duration not overriden");
+	}
+
+	public int getManaCost() {
+		return manaCost;
+	}
+
 	
 	
 	

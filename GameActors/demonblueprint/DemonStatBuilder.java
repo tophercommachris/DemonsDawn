@@ -3,9 +3,7 @@ package demonblueprint;
 public class DemonStatBuilder {
 	
 	private int maxHealth;
-	private int maxMana;
 	private int currentHealth;
-	private int currentMana;
 	private int buffness;
 	private int friskiness;
 	private int brainpower;
@@ -22,18 +20,10 @@ public class DemonStatBuilder {
 		return this;
 }
 	
-	public DemonStatBuilder setMaxMana(int maxMana) {
-		this.maxMana = maxMana;
-		return this;
-	}
+	
 	
 	public DemonStatBuilder setCurrentHealth(int currentHealth) {
 		this.currentHealth = currentHealth;
-		return this;
-	}
-	
-	public DemonStatBuilder setCurrentMana(int currentMana) {
-		this.currentMana = currentMana;
 		return this;
 	}
 	
@@ -83,13 +73,13 @@ public class DemonStatBuilder {
 		return this;
 	}
 	
-	public DemonStatBuilder setXp(int xp) {
+	public DemonStatBuilder setXP(int xp) {
 		this.xp = xp;
 		return this;
 	}
 	
 	public DemonStats build() {
-		return new DemonStats(maxHealth, maxMana, currentHealth, currentMana, buffness,
+		return new DemonStats(maxHealth, currentHealth, buffness,
 				friskiness, brainpower, edginess, luck, fireResist, lightningResist, iceResist,
 				physicalResist, xp);
 	}

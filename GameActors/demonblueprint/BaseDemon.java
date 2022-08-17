@@ -6,22 +6,51 @@ package demonblueprint;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import abilitysource.BaseAbility;
+import abilitysource.StatusEffect;
+import playercharacter.BasePlayerCharacter;
 
 public class BaseDemon {
 	
-	DemonStats demonStats;
-	
-	HashMap<Integer, BaseAbility> abilityMap = new HashMap<>(20);
-	ArrayList<BaseAbility> debuffs = new ArrayList<BaseAbility>();
-	ArrayList<BaseAbility> buffs = new ArrayList<BaseAbility>();
+	protected DemonStats demonStats;
+	protected Random rand = new Random();
+	protected HashMap<Integer, BaseAbility> abilityMap = new HashMap<>(20);
+	ArrayList<BaseAbility> buffDebuffs = new ArrayList<BaseAbility>();
 	
 	String archetype = "";
 	String name = "";
 	String desc = "";
 	String weakness = "";
 	int demonDifficulty = 0;
+	
+	//Methods not overriden
+	
+	public int armorReduction(String damageType) {
+		
+		
+		if (damageType.equals("fire")) {
+			return getFireResist();
+		}
+		
+		else if (damageType.equals("ice")) {
+			return getIceResist();
+		}
+		
+		else if (damageType.equals("lightning")) {
+			return getLightningResist();
+		}
+		
+		else if (damageType.equals("physical")) {
+			return getPhysicalResist();
+		}
+		
+		else
+			return -1;
+	}
+	
+	
 	
 	
 	//Overriden Methods____________________________________________________________________________________________________________________________
@@ -30,9 +59,13 @@ public class BaseDemon {
 		System.out.println("Add Abilties Method Not Overriden");
 	}
 
-	public void useAbility() {
+	public void useAbility(BasePlayerCharacter player, BaseDemon demon) {
 		System.out.println("Use Ability Not Overriden");
 	}	
+	
+	public void useAbility(BaseDemon demon) {
+		System.out.println("Use Ability (demon) not Overriden");
+	}
 	//Getters and Setters__________________________________________________________________________________________________________________________
 	
 public void displayStats() throws InterruptedException {
@@ -40,7 +73,6 @@ public void displayStats() throws InterruptedException {
 		System.out.println("\n\n" + name);
 		System.out.println("Level: " + getLevel());
 		System.out.println("Health: "  +  getCurrentHealth() + "/" +  getMaxHealth());
-		System.out.println("Mana: " +  getCurrentMana() + "/" +  getMaxMana());
 		System.out.println("Buffess: " +  getBuffness());
 		System.out.println("Friskiness: " +  getFriskiness());
 		System.out.println("Brainpower: " +  getBrainpower());
@@ -89,7 +121,14 @@ public int getCurrentHealth() {
 //public void changeCurrentHealth() {
 	
 
-public void changeCurrentHealth(int change) {
+public void changeCurrentHealth(int change, String damageType) {
+
+		change -= armorReduction(damageType);
+		
+		if (change > 0)
+			change = -1;
+		
+		
 	if (demonStats.currentHealth + change > demonStats.maxHealth)
 		demonStats.currentHealth = demonStats.maxHealth;
 	else if (demonStats.currentHealth + change < 0)
@@ -99,36 +138,7 @@ public void changeCurrentHealth(int change) {
 	
 }
 
-public int getMaxMana() {
-	return demonStats.maxMana;
-}
 
-	public int getCurrentMana() {
-		return demonStats.currentMana;
-	}
-
-public void changeMaxMana(int newMax) {
- 
-	if (demonStats.maxMana + newMax < 1) {
-		demonStats.maxMana = 1;
-		demonStats.currentMana = demonStats.maxMana;
-	}
-	
-	else {
-		demonStats.maxMana += newMax;
-		demonStats.currentMana += newMax;
-	}
-	
-}
-
-public void changeCurrentMana(int change) {
-	if (demonStats.currentMana + change > demonStats.maxMana)
-		demonStats.currentMana = demonStats.maxMana;
-	else if (demonStats.currentMana + change < 0)
-		demonStats.currentMana = 0;
-	else
-		demonStats.currentMana += change;
-}
 
 public int getBuffness() {
 	return demonStats.buffness;
@@ -258,5 +268,12 @@ public void setWeakness(String weakness) {
 	this.weakness = weakness;
 }
 
+public ArrayList<BaseAbility> getBuffDebuffs() {
+	return buffDebuffs;
+}
+
+public int getXP() {
+	return demonStats.xp;
+}
 
 }
